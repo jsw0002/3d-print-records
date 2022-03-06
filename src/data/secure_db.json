@@ -1,0 +1,12 @@
+{
+  "test": {
+    "primary": "number-one",
+    "secondary": true,
+    "tertiary": 38,
+    "finally": [
+      "Peace",
+      "Love",
+      "& Happiness"
+    ]
+  }
+}
