@@ -3,10 +3,10 @@ import * as React from "react"
 const Footer = ({children}) => {
   const copyrightText = `© ${new Date().getFullYear()} Copyright: `
   return (
-    <footer class="bg-gray-200 text-center lg:text-left">
-      <div class="text-gray-700 text-center p-4 bg-gray-200">
+    <footer class="bg-gradient-to-r from-violet-500 to-blue-500 text-center lg:text-left">
+      <div class="text-center p-4">
         {copyrightText}
-        <a class="text-gray-800" href="https://tailwind-elements.com/">Dub Enterprises</a>
+        <a class="text-lime-500 hover:decoration-wavy hover:underline" href="https://tailwind-elements.com/">Dub Enterprises</a>
       </div>
     </footer>
   )

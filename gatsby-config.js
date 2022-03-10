@@ -1,3 +1,5 @@
+const path = require('path/posix');
+
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
   siteMetadata: {
@@ -8,7 +10,7 @@ module.exports = {
     resolve: 'gatsby-source-filesystem',
     options: {
       "name": "images",
-      "path": "./src/images/"
+      "path": path.join(__dirname, "src", "images"),
     },
     __key: "images"
   }, {
