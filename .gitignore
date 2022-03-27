@@ -108,3 +108,5 @@ public
 
 # Do not ignore
 !types.d.ts
+
+.env*
