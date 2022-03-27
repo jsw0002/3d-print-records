@@ -103,9 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# Public Gatsby files
-public
-
 # Do not ignore
 !types.d.ts
 
