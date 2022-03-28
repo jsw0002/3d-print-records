@@ -2,7 +2,7 @@
   "name": "3d-print-records",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jsw0002.github.io/3d-print-records",
+  "homepage": "https://3d-print-records.vercel.app/",
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
