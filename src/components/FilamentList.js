@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import AddFilament from './AddFilament';
 import Card from './Card';
 import Grid from '@mui/material/Grid';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import { blue } from "@mui/material/colors";
 
 function FilamentList() {
   const [filaments, setFilaments] = useState([]);
@@ -40,6 +42,17 @@ function FilamentList() {
     p: 4,
   };
 
+  const buttonStyle = {
+    position: 'absolute',
+    right: 25,
+    bottom: 25,
+  };
+
+  const iconStyle = {
+    fontSize: '72px',
+    color: blue[500],
+  };
+
   return (
     <>
       <Grid container spacing={2}>
@@ -51,7 +64,9 @@ function FilamentList() {
           ))
         }
       </Grid>
-      <Button onClick={openModal}>Open Modal</Button>
+      <IconButton sx={buttonStyle} aria-label="open-modal" onClick={openModal}>
+        <AddCircleIcon sx={iconStyle} />
+      </IconButton>
       <Modal
         open={showModal}
         onClose={hideModal}

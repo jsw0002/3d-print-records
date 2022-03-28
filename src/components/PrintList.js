@@ -42,6 +42,17 @@ function PrintList() {
     p: 4,
   };
 
+  const buttonStyle = {
+    position: 'absolute',
+    right: 25,
+    bottom: 25,
+  };
+
+  const iconStyle = {
+    fontSize: '72px',
+    color: blue[500],
+  };
+
   return (
     <>
       <Grid container spacing={2}>
@@ -53,8 +64,8 @@ function PrintList() {
           ))
         }
       </Grid>
-      <IconButton sx={{bgcolor: blue[500]}} aria-label="open-modal" onClick={openModal}>
-        <AddCircleIcon />
+      <IconButton sx={buttonStyle} aria-label="open-modal" onClick={openModal}>
+        <AddCircleIcon sx={iconStyle} />
       </IconButton>
       <Modal
         open={showModal}
