@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../client';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+import { blue } from "@mui/material/colors";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddFilament from './AddFilament';
+import Box from '@mui/material/Box';
 import Card from './Card';
 import Grid from '@mui/material/Grid';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconButton from '@mui/material/IconButton';
-import { blue } from "@mui/material/colors";
+import Modal from '@mui/material/Modal';
 
 function FilamentList() {
   const [filaments, setFilaments] = useState([]);
@@ -25,31 +25,31 @@ function FilamentList() {
 
   async function fetchFilaments() {
     const { data } = await supabase
-      .from('filaments')
+      .from("filaments")
       .select();
     setFilaments(data);
   }
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
 
   const buttonStyle = {
-    position: 'fixed',
+    position: "fixed",
     right: 25,
     bottom: 25,
   };
 
   const iconStyle = {
-    fontSize: '72px',
+    fontSize: "72px",
     color: blue[500],
   };
 

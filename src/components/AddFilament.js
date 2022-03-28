@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { supabase } from '../client';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import InputAdornment from '@mui/material/InputAdornment';
-import Switch from '@mui/material/Switch';
-import FormGroup from '@mui/material/FormGroup';
+import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
 
 function AddFilament(props) {
   const filamentStarter = { type: "", color: "", price: 0.00, weight: 0, is_gone: false, buy_more_link: "", img_url: "", brand: "" };
@@ -22,7 +22,7 @@ function AddFilament(props) {
 
   async function createFilament() {
     await supabase
-      .from('filaments')
+      .from("filaments")
       .insert([
         { type, color, price, weight, is_gone, buy_more_link, img_url, brand }
       ])

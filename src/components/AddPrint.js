@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../client';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import InputAdornment from '@mui/material/InputAdornment';
-import Switch from '@mui/material/Switch';
-import FormGroup from '@mui/material/FormGroup';
+import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
 
 function AddPrint(props) {
   const printStarter = { name: "", material_cost: 0.00, filament_length_m: 0.00, filament_used: 0, printing_time: 0, img_url: "", stl_source: "", needs_raft: false, needs_supports: false, issues: "" };
@@ -22,7 +22,7 @@ function AddPrint(props) {
 
   async function fetchFilaments() {
     const { data } = await supabase
-      .from('filaments')
+      .from("filaments")
       .select();
     const filteredData = data.map(d => ({
       value: d.id,
@@ -33,7 +33,7 @@ function AddPrint(props) {
 
   async function createPrint() {
     await supabase
-      .from('prints')
+      .from("prints")
       .insert([
         { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues }
       ])

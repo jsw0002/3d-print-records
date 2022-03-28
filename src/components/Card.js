@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../client';
+import { blue, red } from "@mui/material/colors";
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
 import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
 import DeveloperBoardOffIcon from '@mui/icons-material/DeveloperBoardOff';
-import { blue, red } from "@mui/material/colors";
+import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
-  console.log('props: ', props);
   const { name, material_cost, filament_length_m, filament_used, printing_time, img_url } = props.print;
   const [filament, setFilament] = useState({});
 
@@ -22,7 +21,7 @@ export default function MediaCard(props) {
   async function fetchFilament() {
     if (props.print) {
       const { data } = await supabase
-        .from('filaments')
+        .from("filaments")
         .select("*")
         .eq("id", filament_used);
         setFilament(data[0]);
@@ -88,5 +87,5 @@ export default function MediaCard(props) {
       </Card>
     );
   }
-  return 'No card created';
+  return "No card created";
 }
