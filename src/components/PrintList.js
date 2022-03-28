@@ -41,8 +41,8 @@ function PrintList() {
       <Grid container spacing={2}>
         {
           prints.map(p => (
-            <Grid item xs={3}>
-              <Card key={p.id} print={p} />
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Card key={p.id} print={p} filament={{}} />
             </Grid>
           ))
         }
@@ -55,7 +55,7 @@ function PrintList() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <AddPrint />
+          <AddPrint toggleModal={toggleModal} />
         </Box>
       </Modal>
     </>

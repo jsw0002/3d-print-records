@@ -41,8 +41,8 @@ function FilamentList() {
       <Grid container spacing={2}>
         {
           filaments.map(f => (
-            <Grid item xs={3}>
-              <Card key={f.id} filament={f} />
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Card key={f.id} filament={f} print={{}} />
             </Grid>
           ))
         }
@@ -55,7 +55,7 @@ function FilamentList() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <AddFilament />
+          <AddFilament toggleModal={toggleModal} />
         </Box>
       </Modal>
     </>
