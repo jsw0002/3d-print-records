@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.negative-space .MuiSvgIcon-root {
+  margin-bottom: -5px;
+}
