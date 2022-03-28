@@ -6,13 +6,16 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function AddPrint(props) {
-  const printStarter = { name: "", material_cost: 0.00, filament_length_m: 0.00, filament_weight_kg: 0.0000, filament_used: 0, printing_time: 0.00000, img_url: "" };
+  const printStarter = { name: "", material_cost: 0.00, filament_length_m: 0.00, filament_used: 0, printing_time: 0, img_url: "", stl_source: "", needs_raft: false, needs_supports: false, issues: "" };
   const [filaments, setFilaments] = useState([]);
   const [print, setPrint] = useState(printStarter);
-  const { name, material_cost, filament_length_m, filament_weight_kg, filament_used, printing_time, img_url } = print;
-  
+  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues } = print;
+
   useEffect(() => {
     fetchFilaments();
   }, [])
@@ -21,10 +24,9 @@ function AddPrint(props) {
     const { data } = await supabase
       .from('filaments')
       .select();
-    console.log('filament data: ', data);
     const filteredData = data.map(d => ({
       value: d.id,
-      label: `${d.color}/${d.type}`,
+      label: `${d.color} ${d.type}`,
     }));
     setFilaments(filteredData);
   }
@@ -33,11 +35,11 @@ function AddPrint(props) {
     await supabase
       .from('prints')
       .insert([
-        { name, material_cost, filament_length_m, filament_weight_kg, filament_used, printing_time, img_url }
+        { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues }
       ])
       .single();
     setPrint(printStarter);
-    props.toggleModal();
+    props.hideModal();
   }
 
   return (
@@ -53,6 +55,7 @@ function AddPrint(props) {
       <FormControl>
         <TextField
           label="Name"
+          required
           variant="outlined"
           id="name-input"
           placeholder="Name"
@@ -64,6 +67,7 @@ function AddPrint(props) {
       <FormControl>
         <TextField
           label="Material Cost"
+          required
           variant="outlined"
           id="cost-input"
           placeholder="Material Cost"
@@ -78,6 +82,7 @@ function AddPrint(props) {
       <FormControl>
         <TextField
           label="Filament Length"
+          required
           variant="outlined"
           id="length-input"
           placeholder="Filament Length"
@@ -86,20 +91,6 @@ function AddPrint(props) {
           onChange={e => setPrint({ ...print, filament_length_m: e.target.value })}
           InputProps={{
             endAdornment: <InputAdornment position="end">m</InputAdornment>
-          }}
-        />
-      </FormControl>
-      <FormControl>
-        <TextField
-          label="Filament Weight"
-          variant="outlined"
-          id="weight-input"
-          placeholder="Filament Weight"
-          value={filament_weight_kg}
-          type="number"
-          onChange={e => setPrint({ ...print, filament_weight_kg: e.target.value})}
-          InputProps={{
-            endAdornment: <InputAdornment position="end">kg</InputAdornment>
           }}
         />
       </FormControl>
@@ -121,6 +112,7 @@ function AddPrint(props) {
       <FormControl>
         <TextField
           label="Printing Time"
+          required
           variant="outlined"
           id="time-input"
           placeholder="Printing Time"
@@ -135,6 +127,7 @@ function AddPrint(props) {
       <FormControl>
         <TextField
           label="Image URL"
+          required
           variant="outlined"
           id="url-input"
           placeholder="Image URL"
@@ -142,7 +135,53 @@ function AddPrint(props) {
           type="url"
           onChange={e => setPrint({ ...print, img_url: e.target.value })}
         />
-      </FormControl>        
+      </FormControl>
+      <FormControl>
+        <TextField
+          label="Source of STL"
+          required
+          variant="outlined"
+          id="stl-input"
+          placeholder="Source of STL"
+          value={stl_source}
+          type="url"
+          onChange={e => setPrint({ ...print, stl_source: e.target.value})}
+        />
+      </FormControl>
+      <FormControl>
+        <FormGroup>
+          <FormControlLabel  label="Raft?" control={
+            <Switch
+              id="raft-input"
+              checked={needs_raft}
+              onChange={e => setPrint({ ...print, needs_raft: e.target.value})}
+            />}
+          />
+        </FormGroup>          
+      </FormControl>
+      <FormControl>
+        <FormGroup>
+          <FormControlLabel  label="Supports?" control={
+            <Switch
+              id="supports-input"
+              checked={needs_supports}
+              onChange={e => setPrint({ ...print, needs_supports: e.target.value})}
+            />}
+          />
+        </FormGroup>          
+      </FormControl>
+      <FormControl>
+        <TextField
+          label="Issues"
+          variant="outlined"
+          id="issues-input"
+          placeholder="Any issues?"
+          value={issues}
+          multiline
+          rows={5}
+          onChange={e => setPrint({ ...print, issues: e.target.value})}
+        />
+      </FormControl>      
       <Button onClick={createPrint}>Create Print</Button>
     </Box>
   );

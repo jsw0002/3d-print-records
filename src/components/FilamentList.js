@@ -9,19 +9,23 @@ import Grid from '@mui/material/Grid';
 
 function FilamentList() {
   const [filaments, setFilaments] = useState([]);
+  const [triggerFetch, setTriggerFetch] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => setShowModal(!showModal);
+  const openModal = () => setShowModal(true);
+  const hideModal = () => {
+    setShowModal(false);
+    setTriggerFetch(!triggerFetch);
+  };
   
   useEffect(() => {
     fetchFilaments();
-  }, [])
+  }, [triggerFetch])
 
   async function fetchFilaments() {
     const { data } = await supabase
       .from('filaments')
       .select();
     setFilaments(data);
-    console.log('filament data: ', data);
   }
 
   const style = {
@@ -42,20 +46,20 @@ function FilamentList() {
         {
           filaments.map(f => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Card key={f.id} filament={f} print={{}} />
+              <Card key={f.id} filament={f} print={false} />
             </Grid>
           ))
         }
       </Grid>
-      <Button onClick={toggleModal}>Open Modal</Button>
+      <Button onClick={openModal}>Open Modal</Button>
       <Modal
         open={showModal}
-        onClose={toggleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onClose={hideModal}
+        aria-labelledby="modal-add-filament"
+        aria-describedby="modal-form-to-add-filament"
       >
         <Box sx={style}>
-          <AddFilament toggleModal={toggleModal} />
+          <AddFilament toggleModal={hideModal} />
         </Box>
       </Modal>
     </>

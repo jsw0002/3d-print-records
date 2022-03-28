@@ -1,27 +1,33 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import AddPrint from './AddPrint';
 import Card from './Card';
 import Grid from '@mui/material/Grid';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import { blue } from "@mui/material/colors";
 
 function PrintList() {
   const [prints, setPrints] = useState([]);
+  const [triggerFetch, setTriggerFetch] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => setShowModal(!showModal);
+  const openModal = () => setShowModal(true);
+  const hideModal = () => {
+    setShowModal(false);
+    setTriggerFetch(!triggerFetch);
+  };
   
   useEffect(() => {
     fetchPrints();
-  }, [])
+  }, [triggerFetch])
 
   async function fetchPrints() {
     const { data } = await supabase
       .from('prints')
       .select();
     setPrints(data);
-    console.log('print data: ', data);
   }
 
   const style = {
@@ -47,15 +53,17 @@ function PrintList() {
           ))
         }
       </Grid>
-      <Button onClick={toggleModal}>Open Modal</Button>
+      <IconButton sx={{bgcolor: blue[500]}} aria-label="open-modal" onClick={openModal}>
+        <AddCircleIcon />
+      </IconButton>
       <Modal
         open={showModal}
-        onClose={toggleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onClose={hideModal}
+        aria-labelledby="modal-add-print"
+        aria-describedby="modal-form-to-add-print"
       >
         <Box sx={style}>
-          <AddPrint toggleModal={toggleModal} />
+          <AddPrint hideModal={hideModal} />
         </Box>
       </Modal>
     </>
