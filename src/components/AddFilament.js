@@ -11,9 +11,9 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 function AddFilament(props) {
-  const filamentStarter = { type: "", color: "", price: 0.00, weight: 0, is_gone: false, buy_more_link: "", img_url: "" };
+  const filamentStarter = { type: "", color: "", price: 0.00, weight: 0, is_gone: false, buy_more_link: "", img_url: "", brand: "" };
   const [filament, setFilament] = useState(filamentStarter);
-  const { type, color, price, weight, is_gone, buy_more_link, img_url } = filament;
+  const { type, color, price, weight, is_gone, buy_more_link, img_url, brand } = filament;
   const typeValues = [
     { value: "PLA", label: "PLA" },
     { value: "PETG", label: "PETG" },
@@ -24,7 +24,7 @@ function AddFilament(props) {
     await supabase
       .from('filaments')
       .insert([
-        { type, color, price, weight, is_gone, buy_more_link, img_url }
+        { type, color, price, weight, is_gone, buy_more_link, img_url, brand }
       ])
       .single();
     setFilament(filamentStarter);
@@ -55,6 +55,18 @@ function AddFilament(props) {
             </MenuItem>
           ))}
         </TextField>
+      </FormControl>
+      <FormControl>
+        <TextField
+          label="Brand"
+          required
+          variant="outlined"
+          id="brand-input"
+          placeholder="Brand"
+          value={brand}
+          type="text"
+          onChange={e => setFilament({ ...filament, brand: e.target.value })}
+        />
       </FormControl>
       <FormControl>
         <TextField

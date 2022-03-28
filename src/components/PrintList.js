@@ -43,7 +43,7 @@ function PrintList() {
   };
 
   const buttonStyle = {
-    position: 'absolute',
+    position: 'fixed',
     right: 25,
     bottom: 25,
   };

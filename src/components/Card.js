@@ -46,7 +46,7 @@ export default function MediaCard(props) {
             Material Cost: ${material_cost}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Filament Used: {filament.color} {filament.type}
+            Filament Used: {filament.brand} {filament.color} {filament.type}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Amount of Filament Used: {filament_length_m}m
@@ -59,18 +59,18 @@ export default function MediaCard(props) {
     );
   }
   if (props.filament) {
-    const { type, color, price, weight, is_gone, buy_more_link, img_url } = props.filament;
+    const { type, color, price, weight, is_gone, buy_more_link, img_url, brand } = props.filament;
     return (
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
           height="140"
           image={img_url}
-          alt={`${color} ${type} filament - ${weight}kg`}
+          alt={`${brand} ${color} ${type} filament - ${weight}kg`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {color} {type}
+            {brand} {color} {type}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Price: ${price}

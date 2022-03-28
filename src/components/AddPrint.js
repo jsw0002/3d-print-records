@@ -26,7 +26,7 @@ function AddPrint(props) {
       .select();
     const filteredData = data.map(d => ({
       value: d.id,
-      label: `${d.color} ${d.type}`,
+      label: `${d.brand} ${d.color} ${d.type}`,
     }));
     setFilaments(filteredData);
   }

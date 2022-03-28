@@ -43,7 +43,7 @@ function FilamentList() {
   };
 
   const buttonStyle = {
-    position: 'absolute',
+    position: 'fixed',
     right: 25,
     bottom: 25,
   };
