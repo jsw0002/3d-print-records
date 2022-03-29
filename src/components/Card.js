@@ -11,7 +11,7 @@ import DeveloperBoardOffIcon from '@mui/icons-material/DeveloperBoardOff';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
-  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url } = props.print;
+  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source } = props.print;
   const [filament, setFilament] = useState({});
 
   useEffect(() => {
@@ -54,6 +54,9 @@ export default function MediaCard(props) {
             Print Time: {Math.floor(printing_time/60)}h {printing_time % 60}m
           </Typography>
         </CardContent>
+        <CardActions>
+          <Button href={stl_source} target="_blank" size="small">STL File</Button>
+        </CardActions>
       </Card>
     );
   }
