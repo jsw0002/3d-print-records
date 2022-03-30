@@ -38,7 +38,7 @@ export default function MediaCard(props) {
           alt={name.replace(/\s+/g, '-').toLowerCase()}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -71,7 +71,7 @@ export default function MediaCard(props) {
           alt={`${brand} ${color} ${type} filament - ${weight}kg`}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {brand} {color} {type}
           </Typography>
           <Typography variant="body2" color="text.secondary">
