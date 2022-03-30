@@ -55,7 +55,7 @@ export default function MediaCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button href={stl_source} target="_blank" size="small">STL File</Button>
+          <Button href={stl_source} target="_blank" size="small" sx={{ fontWeight: "bold" }} disabled={!stl_source}>STL File</Button>
         </CardActions>
       </Card>
     );
@@ -85,7 +85,7 @@ export default function MediaCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button href={buy_more_link} target="_blank" size="small">Buy More</Button>
+          <Button href={buy_more_link} target="_blank" size="small" sx={{ fontWeight: "bold" }}>Buy More</Button>
         </CardActions>
       </Card>
     );

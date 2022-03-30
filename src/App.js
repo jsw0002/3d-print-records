@@ -40,6 +40,9 @@ function App() {
             <Link href="https://cults3d.com/en/users/jsw0002/downloads" target="_blank">
               <Avatar sx={{ bgcolor: "transparent", width: 24, height: 24 }} src="http://www.google.com/s2/favicons?domain=cults3d.com" alt="Cults Icon" />
             </Link>
+            <Link href="https://pinshape.com/dashboard" target="_blank">
+              <Avatar sx={{ bgcolor: "transparent", width: 24, height: 24 }} src="https://www.google.com/s2/favicons?domain=pinshape.com" alt="Pinshape Icon" />
+            </Link>
             <Link href="https://www.omnicalculator.com/other/3d-printing" target="_blank">
               <Avatar sx={{ bgcolor: "transparent", width: 24, height: 24 }} src="http://www.google.com/s2/favicons?domain=www.omnicalculator.com" alt="Omnicalculator Icon" />
             </Link>
