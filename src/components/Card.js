@@ -11,7 +11,7 @@ import DeveloperBoardOffIcon from '@mui/icons-material/DeveloperBoardOff';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
-  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url } = props.print;
+  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source } = props.print;
   const [filament, setFilament] = useState({});
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function MediaCard(props) {
           alt={name.replace(/\s+/g, '-').toLowerCase()}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -54,6 +54,9 @@ export default function MediaCard(props) {
             Print Time: {Math.floor(printing_time/60)}h {printing_time % 60}m
           </Typography>
         </CardContent>
+        <CardActions>
+          <Button href={stl_source} target="_blank" size="small" sx={{ fontWeight: "bold" }} disabled={!stl_source}>STL File</Button>
+        </CardActions>
       </Card>
     );
   }
@@ -68,7 +71,7 @@ export default function MediaCard(props) {
           alt={`${brand} ${color} ${type} filament - ${weight}kg`}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {brand} {color} {type}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -82,7 +85,7 @@ export default function MediaCard(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button href={buy_more_link} target="_blank" size="small">Buy More</Button>
+          <Button href={buy_more_link} target="_blank" size="small" sx={{ fontWeight: "bold" }}>Buy More</Button>
         </CardActions>
       </Card>
     );
