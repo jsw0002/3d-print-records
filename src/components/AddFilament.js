@@ -11,7 +11,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 
 function AddFilament(props) {
-  const filamentStarter = { type: "", color: "", price: 0.00, weight: 0, is_gone: false, buy_more_link: "", img_url: "", brand: "" };
+  const filamentStarter = { type: "", color: "", price: 0, weight: 0, is_gone: false, buy_more_link: "", img_url: "", brand: "" };
   const [filament, setFilament] = useState(filamentStarter);
   const { type, color, price, weight, is_gone, buy_more_link, img_url, brand } = filament;
   const typeValues = [
@@ -90,7 +90,7 @@ function AddFilament(props) {
           type="number"
           onChange={e => setFilament({ ...filament, price: e.target.value })}
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>
+            startAdornment: <InputAdornment position="start">¢</InputAdornment>
           }}
         />
       </FormControl>
@@ -105,7 +105,7 @@ function AddFilament(props) {
           type="number"
           onChange={e => setFilament({ ...filament, weight: e.target.value })}
           InputProps={{
-            endAdornment: <InputAdornment position="end">kg</InputAdornment>
+            endAdornment: <InputAdornment position="end">g</InputAdornment>
           }}
         />
       </FormControl>

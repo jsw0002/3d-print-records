@@ -11,10 +11,10 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 
 function AddPrint(props) {
-  const printStarter = { name: "", material_cost: 0.00, filament_length_m: 0.00, filament_used: 0, printing_time: 0, img_url: "", stl_source: "", needs_raft: false, needs_supports: false, issues: "" };
+  const printStarter = { name: "", material_cost: 0, filament_length: 0, filament_used: 0, printing_time: 0, img_url: "", stl_source: "", needs_raft: false, needs_supports: false, issues: "" };
   const [filaments, setFilaments] = useState([]);
   const [print, setPrint] = useState(printStarter);
-  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues } = print;
+  const { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues } = print;
 
   useEffect(() => {
     fetchFilaments();
@@ -35,7 +35,7 @@ function AddPrint(props) {
     await supabase
       .from("prints")
       .insert([
-        { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues }
+        { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues }
       ])
       .single();
     setPrint(printStarter);
@@ -75,7 +75,7 @@ function AddPrint(props) {
           type="number"
           onChange={e => setPrint({ ...print, material_cost: e.target.value })}
           InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>
+            startAdornment: <InputAdornment position="start">¢</InputAdornment>
           }}
         />
       </FormControl>
@@ -86,11 +86,11 @@ function AddPrint(props) {
           variant="outlined"
           id="length-input"
           placeholder="Filament Length"
-          value={filament_length_m}
+          value={filament_length}
           type="number"
-          onChange={e => setPrint({ ...print, filament_length_m: e.target.value })}
+          onChange={e => setPrint({ ...print, filament_length: e.target.value })}
           InputProps={{
-            endAdornment: <InputAdornment position="end">m</InputAdornment>
+            endAdornment: <InputAdornment position="end">cm</InputAdornment>
           }}
         />
       </FormControl>
@@ -120,7 +120,7 @@ function AddPrint(props) {
           type="number"
           onChange={e => setPrint({ ...print, printing_time: e.target.value })}
           InputProps={{
-            endAdornment: <InputAdornment position="end">h</InputAdornment>,
+            endAdornment: <InputAdornment position="end">m</InputAdornment>,
           }}
         />
       </FormControl>
