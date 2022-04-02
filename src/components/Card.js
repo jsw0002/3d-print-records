@@ -11,7 +11,7 @@ import DeveloperBoardOffIcon from '@mui/icons-material/DeveloperBoardOff';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
-  const { name, material_cost, filament_length_m, filament_used, printing_time, img_url, stl_source } = props.print;
+  const { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source } = props.print;
   const [filament, setFilament] = useState({});
 
   useEffect(() => {
@@ -42,13 +42,13 @@ export default function MediaCard(props) {
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Material Cost: ${material_cost}
+            Material Cost: ${material_cost/100}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Filament Used: {filament.brand} {filament.color} {filament.type}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Amount of Filament Used: {filament_length_m}m
+            Amount of Filament Used: {filament_length/100}m
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Print Time: {Math.floor(printing_time/60)}h {printing_time % 60}m
@@ -68,17 +68,17 @@ export default function MediaCard(props) {
           component="img"
           height="140"
           image={img_url}
-          alt={`${brand} ${color} ${type} filament - ${weight}kg`}
+          alt={`${brand} ${color} ${type} filament - ${weight/1000}kg`}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
             {brand} {color} {type}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Price: ${price}
+            Price: ${price/100}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Weight: {weight}kg
+            Weight: {weight/1000}kg
           </Typography>
           <Typography variant="body2" color="text.secondary" component="div">
             Any Left? {is_gone ? <span className="negative-space"><DeveloperBoardOffIcon fontSize="small" sx={{ color: red[500]}} /></span> : <span className="negative-space"><DeveloperBoardIcon fontSize="small" sx={{ color: blue[500]}} /></span>}
