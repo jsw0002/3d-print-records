@@ -30,6 +30,11 @@ function PrintList() {
     setPrints(data);
   }
 
+  function testAlert(print) {
+    console.log("this worked, I think", print);
+    alert("Hello World");
+  }
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -58,8 +63,8 @@ function PrintList() {
       <Grid container spacing={2}>
         {
           prints.map(p => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Card key={p.id} print={p} filament={{}} />
+            <Grid key={p.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Card print={p} filament={{}} action={testAlert} />
             </Grid>
           ))
         }
