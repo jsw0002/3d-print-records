@@ -82,7 +82,9 @@ const Navbar = () => {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                <Link to={`/${page.toLowerCase()}`}>{page}</Link>
+                <span className='text-white p-5 no-underline hover:bg-gray-400'>
+                  <Link to={`/${page.toLowerCase()}`}>{page}</Link>
+                </span>
               ))}
             </Box>
           </Toolbar>

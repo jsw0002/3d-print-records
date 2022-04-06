@@ -2,31 +2,31 @@ import { Link } from "react-router-dom"
 
 function PageNotFound() {
   return (
-    <div className="wrapper">
-      <h1 className="text-center mt-5">
+    <div className="flex flex-col">
+      <h1 className="text-center text-6xl font-bold my-10">
         Well who do we have here?
       </h1>
-      <h3 className="text-center">
+      <h3 className="text-center text-4xl my-5">
         Looks like you've found a page that doesn't exist.
       </h3>
-      <h3 className="text-center">
+      <h3 className="text-center text-4xl my-5">
         Question is was it an accident or on purpose?
       </h3>
-      <div className="center-image">
-        <img
-          className="center-image mt-3 mb-3"
-          src="deadpool-stare.gif"
-          max-height="1500"
-          max-width="735"
-          alt="Suspicious Deadpool"
-        />
-      </div>
-      <h3 class="text-center">
+      <img
+        className="mx-auto my-5"
+        src="deadpool-stare.gif"
+        max-height="1500"
+        max-width="735"
+        alt="Suspicious Deadpool"
+      />
+      <h3 class="text-center text-4xl my-5">
         It's not too late to {' '}
-        <Link to="/">
-          turn back {' '}
-        </Link>
-        now.
+        <span className="hover:text-blue-600 hover:underline hover:decoration-wavy">
+          <Link to="/">
+            turn back 
+          </Link>
+        </span>
+        {' '} now.
       </h3>
     </div>
   )

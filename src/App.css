@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -39,28 +43,4 @@
 
 .negative-space .MuiSvgIcon-root {
   margin-bottom: -5px;
-}
-
-.text-center {
-  text-align: center;
-}
-.center-image {
-  margin: 0 auto;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
-}
-
-.mt-3 {
-  margin-top: .75rem;
-}
-
-.mb-3 {
-  margin-bottom: .75rem;
 }
