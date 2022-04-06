@@ -58,8 +58,8 @@ function FilamentList() {
       <Grid container spacing={2}>
         {
           filaments.map(f => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Card key={f.id} filament={f} print={false} />
+            <Grid key={f.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <Card filament={f} print={false} />
             </Grid>
           ))
         }

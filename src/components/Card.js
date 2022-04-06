@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../client';
 import { blue, red } from "@mui/material/colors";
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -15,9 +16,9 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard(props) {
-  const { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, quantity } = props.print;
-  const { action } = props;
+  const { id, name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, quantity } = props.print;
   const [filament, setFilament] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFilament();
@@ -36,7 +37,7 @@ export default function MediaCard(props) {
   if (props.print) {
     return (
       <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea onClick={() => action(props.print)}>
+        <CardActionArea onClick={() => navigate(`/prints/${id}`, { state: props.print })}>
           <CardMedia
             component="img"
             height="140"
@@ -71,29 +72,31 @@ export default function MediaCard(props) {
     );
   }
   if (props.filament) {
-    const { type, color, price, weight, is_gone, buy_more_link, img_url, brand } = props.filament;
+    const { id, type, color, price, weight, is_gone, buy_more_link, img_url, brand } = props.filament;
     return (
       <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={img_url}
-          alt={`${brand} ${color} ${type} filament - ${weight/1000}kg`}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
-            {brand} {color} {type}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Price: ${price/100}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Weight: {weight/1000}kg
-          </Typography>
-          <Typography variant="body2" color="text.secondary" component="div">
-            Any Left? {is_gone ? <span className="negative-space"><DeveloperBoardOffIcon fontSize="small" sx={{ color: red[500]}} /></span> : <span className="negative-space"><DeveloperBoardIcon fontSize="small" sx={{ color: blue[500]}} /></span>}
-          </Typography>
-        </CardContent>
+        <CardActionArea onClick={() => navigate(`/filaments/${id}`, { state: props.filament })}>
+          <CardMedia
+            component="img"
+            height="140"
+            image={img_url}
+            alt={`${brand} ${color} ${type} filament - ${weight/1000}kg`}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="div">
+              {brand} {color} {type}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Price: ${price/100}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Weight: {weight/1000}kg
+            </Typography>
+            <Typography variant="body2" color="text.secondary" component="div">
+              Any Left? {is_gone ? <span className="negative-space"><DeveloperBoardOffIcon fontSize="small" sx={{ color: red[500]}} /></span> : <span className="negative-space"><DeveloperBoardIcon fontSize="small" sx={{ color: blue[500]}} /></span>}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
         <CardActions>
           <Button href={buy_more_link} target="_blank" size="small" sx={{ fontWeight: "bold" }}>Buy More</Button>
         </CardActions>
