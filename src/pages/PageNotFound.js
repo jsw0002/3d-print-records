@@ -14,7 +14,7 @@ function PageNotFound() {
       </h3>
       <img
         className="mx-auto my-5"
-        src="deadpool-stare.gif"
+        src="/images/deadpool-stare.gif"
         max-height="1500"
         max-width="735"
         alt="Suspicious Deadpool"
