@@ -15,6 +15,7 @@ function AddPrint(props) {
   const [filaments, setFilaments] = useState([]);
   const [print, setPrint] = useState(printStarter);
   const { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues } = print;
+  const { project } = props;
 
   useEffect(() => {
     fetchFilaments();
@@ -35,7 +36,7 @@ function AddPrint(props) {
     await supabase
       .from("prints")
       .insert([
-        { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues }
+        { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues, project }
       ])
       .single();
     setPrint(printStarter);
