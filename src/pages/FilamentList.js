@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../client';
-import { useParams } from 'react-router-dom';
 import { blue } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import AddPrint from './AddPrint';
+import AddFilament from '../components/AddFilament';
 import Box from '@mui/material/Box';
+import FilamentCard from '../components/FilamentCard';
+import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 
-function ProjectDetails() {
-  const { id } = useParams();
-  const [project, setProject] = useState({});
+function FilamentList() {
+  const [filaments, setFilaments] = useState([]);
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
@@ -18,30 +18,24 @@ function ProjectDetails() {
     setShowModal(false);
     setTriggerFetch(!triggerFetch);
   };
-
-  async function fetchProjectDetails() {
-    const { data } = await supabase
-      .from('projects')
-      .select(`
-        *,
-        prints (*)
-      `)
-      .eq('id', id);
-    setProject(data);
-    console.log('project: ', project);
-    console.log('data: ', data);
-  }
-
+  
   useEffect(() => {
-    fetchProjectDetails();
-  }, [triggerFetch]);
+    fetchFilaments();
+  }, [triggerFetch])
+
+  async function fetchFilaments() {
+    const { data } = await supabase
+      .from("filaments")
+      .select();
+    setFilaments(data);
+  }
 
   const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 350,
+    width: 400,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -59,25 +53,32 @@ function ProjectDetails() {
     color: blue[500],
   };
 
-
   return (
     <>
-      <h1>{`ProjectDetails for id: ${id}`}</h1>
+      <Grid container spacing={2}>
+        {
+          filaments.map(f => (
+            <Grid key={f.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+              <FilamentCard filament={f} />
+            </Grid>
+          ))
+        }
+      </Grid>
       <IconButton sx={buttonStyle} aria-label="open-modal" onClick={openModal}>
         <AddCircleIcon sx={iconStyle} />
       </IconButton>
       <Modal
         open={showModal}
         onClose={hideModal}
-        aria-labelledby="modal-add-print"
-        aria-describedby="modal-form-to-add-print"
+        aria-labelledby="modal-add-filament"
+        aria-describedby="modal-form-to-add-filament"
       >
         <Box sx={style}>
-          <AddPrint hideModal={hideModal} project={id} />
+          <AddFilament toggleModal={hideModal} />
         </Box>
       </Modal>
     </>
-  )
+  );
 }
 
-export default ProjectDetails
+export default FilamentList;

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import FilamentDetails from './components/FilamentDetails';
-import FilamentList from './components/FilamentList';
+import FilamentDetails from './pages/FilamentDetails';
+import FilamentList from './pages/FilamentList';
 import Footer from './components/Footer';
-import Home from './components/Home';
+import Home from './pages/Home';
 import Navbar from './components/Navbar';
-import PageNotFound from './components/PageNotFound';
+import PageNotFound from './pages/PageNotFound';
 import PrintDetails from './components/PrintDetails';
 import PrintList from './components/PrintList';
-import ProjectDetails from './components/ProjectDetails';
-import ProjectList from './components/ProjectList';
+import ProjectDetails from './pages/ProjectDetails';
+import ProjectList from './pages/ProjectList';
 import './App.css';
 
 function App() {

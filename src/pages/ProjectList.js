@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import { blue } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import AddPrint from './AddPrint';
+import AddProject from '../components/AddProject';
 import Box from '@mui/material/Box';
-import PrintCard from './PrintCard';
+import ProjectCard from '../components/ProjectCard';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 
-function PrintList() {
-  const [prints, setPrints] = useState([]);
+function ProjectList() {
+  const [projects, setProjects] = useState([]);
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
@@ -18,16 +18,16 @@ function PrintList() {
     setShowModal(false);
     setTriggerFetch(!triggerFetch);
   };
-  
-  useEffect(() => {
-    fetchPrints();
-  }, [triggerFetch])
 
-  async function fetchPrints() {
+  useEffect(() => {
+    fetchProjects();
+  }, [triggerFetch]);
+
+  async function fetchProjects() {
     const { data } = await supabase
-      .from("prints")
+      .from('projects')
       .select();
-    setPrints(data);
+    setProjects(data);
   }
 
   const style = {
@@ -57,9 +57,9 @@ function PrintList() {
     <>
       <Grid container spacing={2}>
         {
-          prints.map(p => (
+          projects.map(p => (
             <Grid key={p.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <PrintCard print={p} />
+              <ProjectCard project={p} />
             </Grid>
           ))
         }
@@ -70,15 +70,15 @@ function PrintList() {
       <Modal
         open={showModal}
         onClose={hideModal}
-        aria-labelledby="modal-add-print"
-        aria-describedby="modal-form-to-add-print"
+        aria-labelledby="modal-add-project"
+        aria-describedby="modal-form-to-add-project"
       >
         <Box sx={style}>
-          <AddPrint hideModal={hideModal} />
+          <AddProject hideModal={hideModal} />
         </Box>
       </Modal>
     </>
-  );
+  )
 }
 
-export default PrintList;
+export default ProjectList
