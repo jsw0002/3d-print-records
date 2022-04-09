@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../client';
 import { blue } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddProject from '../components/AddProject';
 import Box from '@mui/material/Box';
-import ProjectCard from '../components/ProjectCard';
-import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import InfoIcon from '@mui/icons-material/Info';
 import Modal from '@mui/material/Modal';
 
 function ProjectList() {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -55,15 +59,60 @@ function ProjectList() {
 
   return (
     <>
-      <Grid container spacing={2}>
-        {
-          projects.map(p => (
-            <Grid key={p.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <ProjectCard project={p} />
-            </Grid>
-          ))
-        }
-      </Grid>
+      <Box sx={{ display: { xl: 'none' }}} >
+        <ImageList variant='masonry' cols={2} gap={4}>
+          {
+            projects.map(p => (
+              <ImageListItem key={p.id}>
+                <img
+                  src={p.img_url}
+                  alt={p.name}
+                  loading='lazy'
+                />
+                <ImageListItemBar
+                  title={p.name}
+                  actionIcon={
+                    <IconButton
+                      sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                      aria-label={`info about ${p.name}`}
+                      onClick={() => navigate(`/projects/${p.id}`)}
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  }
+                />
+              </ImageListItem>
+            ))
+          }
+        </ImageList>
+      </Box>
+      <Box sx={{ display: { xs: 'none', md: 'block' }}} >
+        <ImageList variant='masonry' cols={5} gap={4}>
+          {
+            projects.map(p => (
+              <ImageListItem key={p.id}>
+                <img
+                  src={p.img_url}
+                  alt={p.name}
+                  loading='lazy'
+                />
+                <ImageListItemBar
+                  title={p.name}
+                  actionIcon={
+                    <IconButton
+                      sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                      aria-label={`info about ${p.name}`}
+                      onClick={() => navigate(`/projects/${p.id}`)}
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  }
+                />
+              </ImageListItem>
+            ))
+          }
+        </ImageList>
+      </Box>
       <IconButton sx={buttonStyle} aria-label="open-modal" onClick={openModal}>
         <AddCircleIcon sx={iconStyle} />
       </IconButton>
