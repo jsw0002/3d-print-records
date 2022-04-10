@@ -5,12 +5,14 @@ import { blue } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddProject from '../components/AddProject';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import InfoIcon from '@mui/icons-material/Info';
 import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 function ProjectList() {
   const navigate = useNavigate();
@@ -58,8 +60,11 @@ function ProjectList() {
   };
 
   return (
-    <>
+    <Container>
       <Box sx={{ display: { xl: 'none' }}} >
+        <Typography mt={1} mb={1} textAlign='center' variant='h4'>
+          Completed Projects
+        </Typography>
         <ImageList variant='masonry' cols={2} gap={4}>
           {
             projects.map(p => (
@@ -86,8 +91,11 @@ function ProjectList() {
           }
         </ImageList>
       </Box>
-      <Box sx={{ display: { xs: 'none', md: 'block' }}} >
-        <ImageList variant='masonry' cols={5} gap={4}>
+      <Box sx={{ display: { xs: 'none', md: 'block' }}}>
+        <Typography mb={2} mt={2} textAlign='center' variant='h2'>
+          Completed Projects
+        </Typography>
+        <ImageList variant='masonry' cols={4} gap={4}>
           {
             projects.map(p => (
               <ImageListItem key={p.id}>
@@ -126,7 +134,7 @@ function ProjectList() {
           <AddProject hideModal={hideModal} />
         </Box>
       </Modal>
-    </>
+    </Container>
   )
 }
 
