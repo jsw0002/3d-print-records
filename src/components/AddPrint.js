@@ -11,10 +11,10 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 
 function AddPrint(props) {
-  const printStarter = { name: "", material_cost: 0, filament_length: 0, filament_used: 0, printing_time: 0, img_url: "", stl_source: "", needs_raft: false, needs_supports: false, issues: "" };
+  const printStarter = { name: "", material_cost: 0, filament_length: 0, filament_used: 0, printing_time: 0, img_url: "", needs_raft: false, needs_supports: false, issues: "" };
   const [filaments, setFilaments] = useState([]);
   const [print, setPrint] = useState(printStarter);
-  const { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues } = print;
+  const { name, material_cost, filament_length, filament_used, printing_time, img_url, needs_raft, needs_supports, issues } = print;
   const { project } = props;
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function AddPrint(props) {
     await supabase
       .from("prints")
       .insert([
-        { name, material_cost, filament_length, filament_used, printing_time, img_url, stl_source, needs_raft, needs_supports, issues, project }
+        { name, material_cost, filament_length, filament_used, printing_time, img_url, needs_raft, needs_supports, issues, project }
       ])
       .single();
     setPrint(printStarter);
@@ -135,18 +135,6 @@ function AddPrint(props) {
           value={img_url}
           type="url"
           onChange={e => setPrint({ ...print, img_url: e.target.value })}
-        />
-      </FormControl>
-      <FormControl>
-        <TextField
-          label="Source of STL"
-          required
-          variant="outlined"
-          id="stl-input"
-          placeholder="Source of STL"
-          value={stl_source}
-          type="url"
-          onChange={e => setPrint({ ...print, stl_source: e.target.value})}
         />
       </FormControl>
       <FormControl>

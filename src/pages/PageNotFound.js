@@ -19,7 +19,7 @@ function PageNotFound() {
         max-width="735"
         alt="Suspicious Deadpool"
       />
-      <h3 class="text-center text-4xl my-5">
+      <h3 className="text-center text-4xl my-5">
         It's not too late to {' '}
         <span className="hover:text-blue-600 hover:underline hover:decoration-wavy">
           <Link to="/">
