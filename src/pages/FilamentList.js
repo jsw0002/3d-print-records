@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../client';
 import { blue } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import AddPrint from './AddPrint';
+import AddFilament from '../components/AddFilament';
 import Box from '@mui/material/Box';
-import Card from './Card';
+import Container from '@mui/material/Container';
+import FilamentCard from '../components/FilamentCard';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
-function PrintList() {
-  const [prints, setPrints] = useState([]);
+function FilamentList() {
+  const [filaments, setFilaments] = useState([]);
   const [triggerFetch, setTriggerFetch] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
@@ -20,14 +22,14 @@ function PrintList() {
   };
   
   useEffect(() => {
-    fetchPrints();
+    fetchFilaments();
   }, [triggerFetch])
 
-  async function fetchPrints() {
+  async function fetchFilaments() {
     const { data } = await supabase
-      .from("prints")
+      .from("filaments")
       .select();
-    setPrints(data);
+    setFilaments(data);
   }
 
   const style = {
@@ -35,7 +37,7 @@ function PrintList() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 350,
+    width: 400,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -54,12 +56,15 @@ function PrintList() {
   };
 
   return (
-    <>
+    <Container>
+      <Typography mt={1} mb={1} textAlign='center' variant='h4'>
+        Filaments
+      </Typography>
       <Grid container spacing={2}>
         {
-          prints.map(p => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <Card key={p.id} print={p} filament={{}} />
+          filaments.map(f => (
+            <Grid key={f.id} item xs={12} sm={6} md={4} lg={3}>
+              <FilamentCard filament={f} />
             </Grid>
           ))
         }
@@ -70,15 +75,15 @@ function PrintList() {
       <Modal
         open={showModal}
         onClose={hideModal}
-        aria-labelledby="modal-add-print"
-        aria-describedby="modal-form-to-add-print"
+        aria-labelledby="modal-add-filament"
+        aria-describedby="modal-form-to-add-filament"
       >
         <Box sx={style}>
-          <AddPrint hideModal={hideModal} />
+          <AddFilament toggleModal={hideModal} />
         </Box>
       </Modal>
-    </>
+    </Container>
   );
 }
 
-export default PrintList;
+export default FilamentList;
