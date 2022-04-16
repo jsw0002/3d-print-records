@@ -39,8 +39,6 @@ function ProjectDetails() {
       `)
       .eq('id', id);
     setProject(data[0]);
-    console.log('project: ', project);
-    console.log('data: ', data);
   }
 
   function sumProjectData() {

@@ -4,10 +4,12 @@ import { blue } from "@mui/material/colors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AddFilament from '../components/AddFilament';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import FilamentCard from '../components/FilamentCard';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 function FilamentList() {
   const [filaments, setFilaments] = useState([]);
@@ -54,11 +56,14 @@ function FilamentList() {
   };
 
   return (
-    <>
+    <Container>
+      <Typography mt={1} mb={1} textAlign='center' variant='h4'>
+        Filaments
+      </Typography>
       <Grid container spacing={2}>
         {
           filaments.map(f => (
-            <Grid key={f.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+            <Grid key={f.id} item xs={12} sm={6} md={4} lg={3}>
               <FilamentCard filament={f} />
             </Grid>
           ))
@@ -77,7 +82,7 @@ function FilamentList() {
           <AddFilament toggleModal={hideModal} />
         </Box>
       </Modal>
-    </>
+    </Container>
   );
 }
 

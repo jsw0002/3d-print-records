@@ -1,4 +1,6 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { supabase } from '../client';
 import Box from '@mui/material/Box';
 import Chart from '../components/Chart';
 import Container from '@mui/material/Container';
@@ -7,9 +9,31 @@ import Paper from '@mui/material/Paper';
 import RecentPrints from '../components/RecentPrints';
 
 function FilamentDetails() {
-  const { state } = useLocation();
-  console.log('state: ', state);
-  // const { id } = useParams();
+  const { id } = useParams();
+  const [filament, setFilament] = useState({});
+  const [printData, setPrintData] = useState([]);
+  const { type, color, price, weight, is_gone, buy_more_link, img_url, brand } = filament;
+  
+  async function fetchFilamentDetails() {
+    const { data } = await supabase
+      .from('filaments')
+      .select(`
+        *,
+        prints (*)
+      `)
+      .eq('id', id);
+    setFilament(data[0]);
+  }
+
+  useEffect(() => {
+    fetchFilamentDetails();
+  }, []);
+
+  useEffect(() => {
+    const prints = filament.hasOwnProperty('prints');
+    if (prints) setPrintData(filament.prints);
+  }, [filament])
+
   return (
     <Box
           component="main"
@@ -35,7 +59,7 @@ function FilamentDetails() {
                 height: 240,
               }}
             >
-              <Chart />
+              <Chart prints={printData} />
             </Paper>
           </Grid>
           {/* Image */}
@@ -48,13 +72,13 @@ function FilamentDetails() {
                 height: 240,
               }}
             >
-              <>Placeholder</>
+              <img src={img_url} alt={`${brand} ${color} ${type} filament - ${weight/1000}kg`} className='max-h-48' />
             </Paper>
           </Grid>
           {/* Recent Prints */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <RecentPrints />
+              <RecentPrints prints={printData} />
             </Paper>
           </Grid>
         </Grid>
