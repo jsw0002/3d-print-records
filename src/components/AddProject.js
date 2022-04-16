@@ -6,15 +6,15 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 
 function AddProject(props) {
-  const projectStarter = { name: '', img_url: ''};
+  const projectStarter = { name: '', img_url: '', stl_source: '' };
   const [project, setProject] = useState(projectStarter);
-  const { name, img_url } = project;
+  const { name, img_url, stl_source } = project;
 
   async function createProject() {
     await supabase 
       .from('projects')
       .insert([
-        { name, img_url }
+        { name, img_url, stl_source }
       ])
       .single();
     setProject(projectStarter);
@@ -53,6 +53,18 @@ function AddProject(props) {
           value={img_url}
           type="url"
           onChange={e => setProject({ ...project, img_url: e.target.value })}
+        />
+      </FormControl>
+      <FormControl>
+        <TextField
+          label="STL Source"
+          required
+          variant="outlined"
+          id="stl-input"
+          placeholder="STL Source"
+          value={stl_source}
+          type="url"
+          onChange={e => setProject({ ...project, stl_source: e.target.value })}
         />
       </FormControl>
       <Button onClick={createProject}>Create Project</Button>
