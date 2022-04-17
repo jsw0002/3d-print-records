@@ -12,7 +12,7 @@ export default function Chart(props) {
     const printArray = [];
     let cost = 0;
     props.prints.map((p, index) => {
-      cost += p.material_cost/100;
+      cost += p.material_cost;
       printArray.push({ index, cost });
       return p;
     });
@@ -53,7 +53,7 @@ export default function Chart(props) {
                 ...theme.typography.body1,
               }}
             >
-              {`$${totalCost}`}
+              {`$${(totalCost/100).toFixed(2)}`}
             </Label>
           </YAxis>
           <Line
