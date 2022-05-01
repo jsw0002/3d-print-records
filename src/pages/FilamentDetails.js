@@ -12,7 +12,7 @@ function FilamentDetails() {
   const { id } = useParams();
   const [filament, setFilament] = useState({});
   const [printData, setPrintData] = useState([]);
-  const { type, color, price, weight, is_gone, buy_more_link, img_url, brand } = filament;
+  const { type, color, weight, img_url, brand } = filament;
   
   async function fetchFilamentDetails() {
     const { data } = await supabase
@@ -29,9 +29,23 @@ function FilamentDetails() {
     fetchFilamentDetails();
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
     const prints = filament.hasOwnProperty('prints');
-    if (prints) setPrintData(filament.prints);
+    if (prints) {
+      const array = [];
+      await Promise.all(filament.prints.map(async p => {
+        const { data: project } = await supabase
+          .from('projects')
+          .select('quantity')
+          .eq('id', p.project);
+        if (project[0].quantity > 1) {
+          for (let i = 0; i < project[0].quantity; i++) array.push(p);
+        } else {
+          array.push(p);
+        }
+      }))
+      setPrintData(array);
+    }
   }, [filament])
 
   return (

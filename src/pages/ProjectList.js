@@ -76,6 +76,7 @@ function ProjectList() {
                 />
                 <ImageListItemBar
                   title={p.name}
+                  subtitle={`${p.quantity} printed`}
                   actionIcon={
                     <IconButton
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
@@ -106,6 +107,7 @@ function ProjectList() {
                 />
                 <ImageListItemBar
                   title={p.name}
+                  subtitle={`${p.quantity} printed`}
                   actionIcon={
                     <IconButton
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}

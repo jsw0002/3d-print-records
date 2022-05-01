@@ -14,8 +14,8 @@ export default function RecentPrints(props) {
   useEffect(() => {
     const printArray = [];
     props.prints.map(p => {
-      const { name, material_cost, filament_length, printing_time, project } = p;
-      printArray.push({ name, material_cost, filament_length, printing_time, project });
+      const { name, material_cost, filament_length, printing_time, project, quantity } = p;
+      printArray.push({ name, material_cost, filament_length, printing_time, project, quantity });
       return p;
     });
     setRows(printArray);
@@ -33,6 +33,7 @@ export default function RecentPrints(props) {
             <TableCell>Cost</TableCell>
             <TableCell>Length Used</TableCell>
             <TableCell>Time</TableCell>
+            <TableCell>Quantity</TableCell>
             <TableCell align="right">Project</TableCell>
           </TableRow>
         </TableHead>
@@ -43,6 +44,7 @@ export default function RecentPrints(props) {
               <TableCell>{`$${(row.material_cost/100).toFixed(2)}`}</TableCell>
               <TableCell>{`${row.filament_length/100}m`}</TableCell>
               <TableCell>{`${Math.floor(row.printing_time/60)}h ${row.printing_time%60}m`}</TableCell>
+              <TableCell>{row.quantity}</TableCell>
               <TableCell align="right" onClick={() => navigate(`/projects/${row.project}`)}>Project</TableCell>
             </TableRow>
           ))}
